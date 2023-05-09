@@ -5,12 +5,11 @@ import MengeContext from "./context/MengeContext";
 
 export default function App() {
 
-	// TODO -> add .env to .gitignore
+	// TODO -> insert .env to .gitignore
 	return (
 		<div className="App">
 			<MengeContext>
 				<BrowserRouter>
-
 
 					<SystemRoutes>
 						<Layout />

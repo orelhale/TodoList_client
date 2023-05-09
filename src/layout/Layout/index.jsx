@@ -7,27 +7,28 @@ import { checkToken, setToken, deleteToken } from "../../functions/tokenFunction
 import { useNavigate } from "react-router-dom"
 
 export default function Layout() {
-	let { userData, setUserData } = useContext(Context)
-	let navigate = useNavigate()
+	
+	// let { userData, setUserData } = useContext(Context)
+	// let navigate = useNavigate()
 
 
-	useEffect(() => {
-		startCheckToken()
-	}, [])
+	// useEffect(() => {
+	// 	startCheckToken()
+	// }, [])
 
 
-	async function startCheckToken() {
-		return;
-		let dataFromUser = await checkToken();
+	// async function startCheckToken() {
+	// 	return;
+	// 	let dataFromUser = await checkToken();
 
-		if (dataFromUser) {
-			setUserData(dataFromUser)
-		} else {
-			deleteToken()
-			setUserData(null)
-			navigate("login")
-		}
-	}
+	// 	if (dataFromUser) {
+	// 		setUserData(dataFromUser)
+	// 	} else {
+	// 		deleteToken()
+	// 		setUserData(null)
+	// 		navigate("login")
+	// 	}
+	// }
 
 
 	return (

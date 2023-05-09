@@ -13,11 +13,11 @@ async function apiFunctions(path, type, data) {
         return await axios(option)
             .then(
                 (data) => {
-                    console.log("data from server =", data);
+                    // console.log("data from server = ", data);
                     return data.data
                 },
                 (error) => {
-                    console.log("error from server =", error);
+                    console.log("error from server = ", error);
                     return null
                 }
             )
