@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-async function apiFunctions(path, type, data) {
+async function apiFunctions(path, type, data, callbackSuccess, callbackError) {
     try {
         let option = {
             method: type,
@@ -14,10 +14,12 @@ async function apiFunctions(path, type, data) {
             .then(
                 (data) => {
                     // console.log("data from server = ", data);
+                    callbackSuccess && callbackSuccess(data.data)
                     return data.data
                 },
                 (error) => {
                     console.log("error from server = ", error);
+                    callbackError && callbackError()
                     return null
                 }
             )

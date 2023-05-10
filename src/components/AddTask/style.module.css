@@ -1,0 +1,40 @@
+
+
+.AddTask{
+	display: flex;
+   justify-content: space-between;
+   /* border: 1px red solid; */
+   width: 100%;
+
+}
+
+.containerInputAddTask{
+   border: 1px #B7B7B7 solid;
+   padding: 4px 0px 4px 4px;
+
+   width: 90%;
+   border-radius: 4px;
+   background-color: white;
+   display: flex;
+   /* flex-direction: row; */
+   justify-content: center;
+}
+
+
+.inputAddTask{
+   all: unset;
+   height: 16px;
+   width: 100%;
+}
+
+.buttonSubmit{
+   padding: 4px;
+   /* border: 1px #0052A5 solid; */
+   background-color: #1890FF;
+   width: 200px;
+   margin-left: 10px;
+   border-radius: 4px;
+   
+   color: #fff;
+   
+}
