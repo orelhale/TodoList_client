@@ -2,11 +2,20 @@
 .Task{
    display: flex;
    flex-direction: row;
-   border: 1px solid black;
+   /* border: 1px solid black; */
+   margin: 15px;
 }
+
 
 .description{
    width: 100%;
+}
+
+.checkboxContainer{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin: 0px 5px 0px 0px;
 }
 
 .highTask {

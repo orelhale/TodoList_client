@@ -40,14 +40,28 @@ export default function AddTask() {
 		}
 
 		if (editTask) {
+			// Edit task
 			dataToServer = { ...editTask, ...dataToServer }
 			apiFunctions("tasks", "PUT", dataToServer, (data) => {
+
+				// Get new list
 				setListTask(data)
+
+				// Data reset
+				setPriorityData(1)
+				setDescriptionData("")
 			})
 		} else {
+			// Create new task
 			apiFunctions("tasks", "POST", dataToServer, (data) => {
+
+				// Get new list
 				setListTask(data)
+
+				// Data reset
 				setEditTask(null)
+				setPriorityData(1)
+				setDescriptionData("")
 			})
 		}
 	}
@@ -63,11 +77,6 @@ export default function AddTask() {
 	return (
 		<div className={styles.AddTask}>
 			<div className={styles.containerInputAddTask} style={borderStyle}>
-				<select onChange={handleSelect} value={priorityData}>
-					<option value={1}>L</option>
-					<option value={2}>M</option>
-					<option value={3}>H</option>
-				</select>
 				<input
 					className={styles.inputAddTask}
 					placeholder="New task"
@@ -76,6 +85,11 @@ export default function AddTask() {
 					type="text"
 					required
 				/>
+				<select onChange={handleSelect} value={priorityData}>
+					<option value={1}>L</option>
+					<option value={2}>M</option>
+					<option value={3}>H</option>
+				</select>
 			</div>
 
 			<div className={styles.buttonSubmit} onClick={handleAddTask}>

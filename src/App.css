@@ -9,6 +9,11 @@
       --color-light_gray: #B7B7B7;
       
       
-      --color-navy_blue: #1890FF;
-      --color-light_gray2: #F9F9F9;
+      
+      --color-_blue: #1890FF;
+
+      /* backGround */
+      --color-_gray :#F9F9F9;
+      /* border */
+      --color-_gray2 :#E8E8E8;
    }

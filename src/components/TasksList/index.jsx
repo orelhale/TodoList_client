@@ -39,19 +39,34 @@ export default function TasksList() {
 		})
 	}
 
+	function getHrElement(index) {
+		return (index < listTask.length -1) && <hr className={styles.hr2} />
+	}
+
 	return (
 		<div className={styles.TasksList}>
+			<div className={styles.header}>Todo list</div>
+			<hr className={styles.hr} />
+
 			{listTask[0] &&
-				listTask.map((task, indexTask) => {
-					return <Task
-						handleDoubleClick={handleDoubleClick}
-						indexTask={indexTask}
-						key={indexTask}
-						data={task}
-						handleCheckbox={handleCheckbox}
-						handleDelete={handleDelete}
-					/>
-				})
+				<div className={styles.listContainer}>
+					{
+						listTask.map((task, indexTask) => {
+							return <>
+								<Task
+									handleDoubleClick={handleDoubleClick}
+									indexTask={indexTask}
+									key={indexTask}
+									data={task}
+									handleCheckbox={handleCheckbox}
+									handleDelete={handleDelete}
+								/>
+								{getHrElement(indexTask)}
+								
+							</>
+						})
+					}
+				</div>
 			}
 		</div >
 	)

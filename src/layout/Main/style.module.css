@@ -1,6 +1,7 @@
 
 .Main{
-   background-color: #e5e5e5;
+   /* background-color: #e5e5e5; */
+   background-color: #F9F9F9;
    width: 100vw;
    min-height: 100vh;
    display: flex;
