@@ -2,6 +2,7 @@ import { useContext, useEffect, useState, useRef } from "react"
 import styles from "./style.module.css"
 import apiFunctions from "../../functions/apiFunctions"
 import Context from "../../context/Context"
+import Plus1 from "../icons/Plus1"
 
 export default function AddTask() {
 	let { setListTask, editTask, setEditTask } = useContext(Context)
@@ -66,8 +67,8 @@ export default function AddTask() {
 		}
 	}
 
-	let buttonAddTask = ("+ Add");
-	let buttonEditTask = ("Edit");
+	let buttonAddTask = <>{<Plus1 style={{marginRight: "7px"}} />} Add</>;
+	let buttonEditTask = <>{<Plus1 style={{marginRight: "7px"}} />} Edit</>;
 
 	// useEffect(()=>{
 	// 	console.log("priorityData = ",priorityData);
