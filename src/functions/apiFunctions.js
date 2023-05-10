@@ -13,7 +13,7 @@ async function apiFunctions(path, type, data, callbackSuccess, callbackError) {
         return await axios(option)
             .then(
                 (data) => {
-                    // console.log("data from server = ", data);
+                    console.log("data from server = ", data.data);
                     callbackSuccess && callbackSuccess(data.data)
                     return data.data
                 },

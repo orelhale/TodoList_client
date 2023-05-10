@@ -3,6 +3,9 @@ import styles from "./style.module.css"
 import apiFunctions from "../../functions/apiFunctions"
 import Context from "../../context/Context"
 import Plus1 from "../icons/Plus1"
+import Edit from "../icons/Edit"
+import SelectList from "../SelectList"
+import { getPriorityListName, getPriorityListPoint, getBallPriority, getBallPriorityMUI } from "../../functions/taskFanctions"
 
 export default function AddTask() {
 	let { setListTask, editTask, setEditTask } = useContext(Context)
@@ -23,7 +26,7 @@ export default function AddTask() {
 	}
 
 	let handleInput = (e) => {
-		if (borderStyle){
+		if (borderStyle) {
 			setBorderStyle(null)
 		}
 		setDescriptionData(e.target.value)
@@ -35,13 +38,11 @@ export default function AddTask() {
 			return;
 		}
 
-		let dataToServer = {
-			description: descriptionData,
-			priority: priorityData
-		}
+		let dataToServer = { description: descriptionData, priority: priorityData }
 
 		if (editTask) {
 			// Edit task
+			editTask.is_done = false;
 			dataToServer = { ...editTask, ...dataToServer }
 			apiFunctions("tasks", "PUT", dataToServer, (data) => {
 
@@ -67,16 +68,13 @@ export default function AddTask() {
 		}
 	}
 
-	let buttonAddTask = <>{<Plus1 style={{marginRight: "7px"}} />} Add</>;
-	let buttonEditTask = <>{<Plus1 style={{marginRight: "7px"}} />} Edit</>;
 
-	// useEffect(()=>{
-	// 	console.log("priorityData = ",priorityData);
-	// },[priorityData])
-
+	let buttonAddTask = <>{<Plus1 style={{ marginRight: "7px" }} />} Add</>;
+	let buttonEditTask = <>{<Edit style={{ marginRight: "7px" }} />} Edit</>;
 
 	return (
 		<div className={styles.AddTask}>
+
 			<div className={styles.containerInputAddTask} style={borderStyle}>
 				<input
 					className={styles.inputAddTask}
@@ -86,16 +84,13 @@ export default function AddTask() {
 					type="text"
 					required
 				/>
-				<select onChange={handleSelect} value={priorityData}>
-					<option value={1}>L</option>
-					<option value={2}>M</option>
-					<option value={3}>H</option>
-				</select>
+				<SelectList handleChange={handleSelect} myValue={getBallPriorityMUI} value={priorityData} listMenuItem={getPriorityListPoint} />
 			</div>
 
 			<div className={styles.buttonSubmit} onClick={handleAddTask}>
 				{editTask ? buttonEditTask : buttonAddTask}
 			</div>
+
 		</div>
 	)
 }

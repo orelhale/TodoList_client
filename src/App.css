@@ -1,5 +1,5 @@
-   .ssss{
-      --color-blue: #0052A5;
+   .App{
+      /* --color-blue: #0052A5;
       --color-gray: #333333;
       --color-white: #FFFFFF;
       --color-grayish: #ECECEC;
@@ -10,10 +10,10 @@
       
       
       
-      --color-_blue: #1890FF;
+      --color-_blue: #1890FF; */
 
       /* backGround */
-      --color-_gray :#F9F9F9;
+      /* --color-_gray :#F9F9F9; */
       /* border */
-      --color-_gray2 :#E8E8E8;
+      /* --color-_gray2 :hsl(0, 0%, 74%); */
    }

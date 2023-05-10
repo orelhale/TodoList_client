@@ -1,26 +1,27 @@
-.AddTask{
-	display: flex;
+.AddTask {
+   display: flex;
    justify-content: space-between;
    margin: 30px 0px;
 }
 
-.containerInputAddTask{
-   border: 2px #E8E8E8 solid;
+.containerInputAddTask {
+   border: 2px hsl(0, 0%, 74%) solid;
    padding: 8px 12px;
    width: 90%;
    border-radius: 4px;
    background-color: white;
    display: flex;
    justify-content: center;
+   align-items: center;
 }
 
-.inputAddTask{
+.inputAddTask {
    all: unset;
-   height: 16px;
+   height: 20px;
    width: 100%;
 }
 
-.buttonSubmit{
+.buttonSubmit {
    padding: 8px;
    background-color: #1890FF;
    width: 10%;
@@ -29,5 +30,27 @@
    color: #fff;
    display: flex;
    justify-content: center;
-   /* align-items: center; */
+   align-items: center;
+}
+
+
+.highTask {
+   background-color: "#a94442";
+   width: "10px";
+   height: "10px";
+   border-radius: "50%";
+}
+
+.middleTask {
+   background-color: "#8a6d3b";
+   width: "10px";
+   height: "10px";
+   border-radius: "50%";
+}
+
+.lowTask {
+   background-color: "#3c763d" ;
+   width: "10px";
+   height: "10px";
+   border-radius: "50%";
 }
