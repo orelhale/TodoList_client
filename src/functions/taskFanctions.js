@@ -2,9 +2,9 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
 
 function getBallPriorityMUI(num, style = {}) {
-   let highTask = <FiberManualRecordIcon sx={{ backgroundColor: "#a94442", color: "#a94442", width: "10px", height: "10px", borderRadius: "50%", ...style }}></FiberManualRecordIcon>
-   let middleTask = <FiberManualRecordIcon sx={{ backgroundColor: "#8a6d3b", color: "#8a6d3b", width: "10px", height: "10px", borderRadius: "50%", ...style }}></FiberManualRecordIcon>
-   let lowTask = <FiberManualRecordIcon sx={{ backgroundColor: "#3c763d", color: "#3c763d", width: "10px", height: "10px", borderRadius: "50%", ...style }}></FiberManualRecordIcon>
+   let highTask = <FiberManualRecordIcon sx={{ backgroundColor: "#fa0905", color: "#fa0905", width: "10px", height: "10px", borderRadius: "50%", ...style }}></FiberManualRecordIcon>
+   let middleTask = <FiberManualRecordIcon sx={{ backgroundColor: "#fcb131", color: "#fcb131", width: "10px", height: "10px", borderRadius: "50%", ...style }}></FiberManualRecordIcon>
+   let lowTask = <FiberManualRecordIcon sx={{ backgroundColor: "#35a839", color: "#35a839", width: "10px", height: "10px", borderRadius: "50%", ...style }}></FiberManualRecordIcon>
    return (num == 1 ? lowTask : num == 2 ? middleTask : num == 3 ? highTask : "")
 }
 

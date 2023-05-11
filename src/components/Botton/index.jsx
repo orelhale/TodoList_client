@@ -8,7 +8,7 @@ export default function Botton({ style = {}, value, onClick }) {
       color: "#1890FF",
       ...style
    }
-   console.log("buttonStyle = ",buttonStyle);
+   // console.log("buttonStyle = ",buttonStyle);
 
    return <Button onClick={onClick && onClick} sx={buttonStyle}>{value}</Button>
 }

@@ -79,33 +79,31 @@ export default function TasksList() {
 		let end = (start + amountToShow);
 		let arr = showTasks.slice(start, end);
 		// let arr = fruits.slice(start, end) || [];
-		console.log("start = ", start);
-		console.log("end = ", end);
+		// console.log("start = ", start);
+		// console.log("end = ", end);
 		return arr;
 	}
 
 	function numPagesToShow() {
-		let copyCurrentPage = currentPage ? currentPage : 1
 		let sum = showTasks.length;
-		let result = Math.floor(sum / amountToShow)
-		console.log("result = ", result);
-		let num = result < (sum / amountToShow) ? (result + 1): result;
+		let result = Math.round(sum / amountToShow)
+		let num = result < (sum / amountToShow) ? (result + 1) : result;
 		console.log("num = ", num);
-		return (!num || num == 0) ? 1 : num;
+		return num;
 	}
 
 	function handleClick(num) {
 		num != currentPage && setCurrentPage(num)
 	}
 
-	return (
+	return (<>
 		<div className={styles.TasksList}>
 
 			<div className={styles.buttonContainer}>
 				<button className={styles.button} onClick={() => { setShowTasks(listTask) }}>All tasks</button>
 				<button className={styles.button} onClick={() => { setShowTasks(showTodoTasks) }}>Todo</button>
 				<button className={styles.button} onClick={() => { setShowTasks(showDoneTasks) }}>Done</button>
-				<input value={amountToShow} min={1} onChange={handleInputAmountTasks} />
+				{/* <input value={amountToShow} min={1} onChange={handleInputAmountTasks} /> */}
 			</div>
 			<hr className={styles.hr} />
 
@@ -126,9 +124,10 @@ export default function TasksList() {
 					</>)}
 				</div>
 			}
-			<div>
-				<Pagination pagesNum={numPagesToShow()} handleClick={handleClick}/>
-			</div>
-		</div >
+
+		</div>
+		<div className={styles.paginationContainer}>
+			{showTasks[0] && <Pagination currentPage={currentPage} pagesNum={numPagesToShow()} handleClick={handleClick} />}
+		</div></>
 	)
 }
