@@ -6,10 +6,13 @@
    margin: 30px 0px;
 }
 
-.header {
+.buttonContainer {
    padding: 21px 15px;
    font-weight: 500;
    font-size: 17px;
+   display: flex;
+   justify-content: start;
+   align-items: center;
 }
 
 .hr {
@@ -20,4 +23,31 @@
 .hr2 {
    border: 1px hsl(0, 0%, 74%) solid;
    margin: 0px 15px;
+}
+
+.button{
+   padding: 8px;
+   /* background-color: #1890FF;
+   color: #fff; */
+   /* border: none; */
+   background-color: #fff;
+   color: #1890FF;
+   border: 1px solid #1890FF;
+   width: 100px;
+   margin-left: 10px;
+   border-radius: 4px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+@media only screen and (max-width: 650px) {
+   .buttonContainer {
+      flex-direction: column;
+
+   }
+   .button{
+      margin-left: 0px;
+      margin-top: 2px;
+   }
 }
