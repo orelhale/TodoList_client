@@ -69,8 +69,8 @@ export default function AddTask() {
 	}
 
 
-	let buttonAddTask = <>{<Plus1 style={{ marginRight: "7px" }} />} Add</>;
-	let buttonEditTask = <>{<Edit style={{ marginRight: "7px" }} />} Edit</>;
+	let buttonAddTask = <>{<Plus1 className={styles.iconStyle} />}<span className={styles.buttonText}> Add</span></>;
+	let buttonEditTask = <>{<Edit className={styles.iconStyle} />}<span className={styles.buttonText}> Edit</span></>;
 
 	return (
 		<div className={styles.AddTask}>
