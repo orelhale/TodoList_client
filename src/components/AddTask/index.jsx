@@ -5,7 +5,7 @@ import Context from "../../context/Context"
 import Plus1 from "../icons/Plus1"
 import Edit from "../icons/Edit"
 import SelectList from "../SelectList"
-import { getPriorityListName, getPriorityListPoint, getBallPriority, getBallPriorityMUI } from "../../functions/taskFanctions"
+import { getPriorityListPoint, getBallPriorityMUI } from "../../functions/taskFanctions"
 
 export default function AddTask() {
 	let { setListTask, editTask, setEditTask } = useContext(Context)
@@ -32,34 +32,30 @@ export default function AddTask() {
 		setDescriptionData(e.target.value)
 	}
 
-	let handleAddTask = () => {
+
+	let handleAddOrEditTask = () => {
 		if (!descriptionData) {
 			setBorderStyle({ "border-color": "red" })
 			return;
 		}
-
 		let dataToServer = { description: descriptionData, priority: priorityData }
 
+		// TO edit task
 		if (editTask) {
-			// Edit task
 			editTask.is_done = false;
 			dataToServer = { ...editTask, ...dataToServer }
 			apiFunctions("tasks", "PUT", dataToServer, (data) => {
-
 				// Get new list
 				setListTask(data)
-
 				// Data reset
 				setPriorityData(1)
 				setDescriptionData("")
 			})
+			// TO add task
 		} else {
-			// Create new task
 			apiFunctions("tasks", "POST", dataToServer, (data) => {
-
 				// Get new list
 				setListTask(data)
-
 				// Data reset
 				setEditTask(null)
 				setPriorityData(1)
@@ -68,16 +64,15 @@ export default function AddTask() {
 		}
 	}
 
-
-	let buttonAddTask = <>{<Plus1 className={styles.iconStyle} />}<span className={styles.buttonText}> Add</span></>;
-	let buttonEditTask = <>{<Edit className={styles.iconStyle} />}<span className={styles.buttonText}> Edit</span></>;
+	let buttonAddTask = <>{<Plus1 className={styles.icon} />}<span className={styles.buttonText}> Add</span></>;
+	let buttonEditTask = <>{<Edit className={styles.icon} />}<span className={styles.buttonText}> Edit</span></>;
 
 	return (
 		<div className={styles.AddTask}>
 
-			<div className={styles.containerInputAddTask} style={borderStyle}>
+			<div className={styles.inputContainer} style={borderStyle}>
 				<input
-					className={styles.inputAddTask}
+					className={styles.input}
 					placeholder="New task"
 					value={descriptionData}
 					onChange={handleInput}
@@ -87,7 +82,7 @@ export default function AddTask() {
 				<SelectList handleChange={handleSelect} myValue={getBallPriorityMUI} value={priorityData} listMenuItem={getPriorityListPoint} />
 			</div>
 
-			<div className={styles.buttonSubmit} onClick={handleAddTask}>
+			<div className={styles.buttonSubmit} onClick={handleAddOrEditTask}>
 				{editTask ? buttonEditTask : buttonAddTask}
 			</div>
 

@@ -1,6 +1,6 @@
 import styles from "./style.module.css"
 import Context from "../../context/Context"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect } from "react"
 import Task from "../Task"
 import apiFunctions from "../../functions/apiFunctions"
 
@@ -22,7 +22,7 @@ export default function TasksList() {
 	}
 
 	// To change the task to execution and vice versa
-	function handleCheckbox(event, data, indexTask) {
+	function handleCheckbox(event, data) {
 		let checked = event.target.checked;
 		apiFunctions("tasks", "PUT", { is_done: checked, id: data.id }, (dataFromServer) => {
 			// Get new list
@@ -44,23 +44,22 @@ export default function TasksList() {
 		<div className={styles.TasksList}>
 
 			<div className={styles.header}>Todo list</div>
+
 			<hr className={styles.hr} />
 
 			{listTask[0] &&
 				<div className={styles.listContainer}>
-					{
-						listTask.map((task, indexTask) => <>
-							<Task
-								handleDoubleClick={handleDoubleClick}
-								indexTask={indexTask}
-								key={indexTask}
-								data={task}
-								handleCheckbox={handleCheckbox}
-								handleDelete={handleDelete}
-							/>
-							{(indexTask < listTask.length - 1) && <hr className={styles.hr2} />}
-						</>)
-					}
+					{listTask.map((task, indexTask) => <>
+						<Task
+							handleDoubleClick={handleDoubleClick}
+							indexTask={indexTask}
+							key={indexTask}
+							data={task}
+							handleCheckbox={handleCheckbox}
+							handleDelete={handleDelete}
+						/>
+						{(indexTask < listTask.length - 1) && <hr className={styles.hr2} />}
+					</>)}
 				</div>
 			}
 		</div >

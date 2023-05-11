@@ -4,7 +4,7 @@
    margin: 30px 0px;
 }
 
-.containerInputAddTask {
+.inputContainer {
    border: 2px hsl(0, 0%, 74%) solid;
    padding: 8px 12px;
    width: 90%;
@@ -15,7 +15,7 @@
    align-items: center;
 }
 
-.inputAddTask {
+.input {
    all: unset;
    height: 20px;
    width: 100%;
@@ -33,36 +33,15 @@
    align-items: center;
 }
 
-
-.highTask {
-   background-color: "#a94442";
-   width: "10px";
-   height: "10px";
-   border-radius: "50%";
-}
-
-.middleTask {
-   background-color: "#8a6d3b";
-   width: "10px";
-   height: "10px";
-   border-radius: "50%";
-}
-
-.lowTask {
-   background-color: "#3c763d" ;
-   width: "10px";
-   height: "10px";
-   border-radius: "50%";
-}
-.iconStyle{
+.icon {
    margin-right: 7px;
 }
 
 @media only screen and (max-width: 650px) {
-   .buttonText{
+   .buttonText {
       display: none;
    }
-   .iconStyle{
+   .icon {
       margin: 0;
    }
 }
