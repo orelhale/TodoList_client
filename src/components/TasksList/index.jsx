@@ -31,14 +31,7 @@ export default function TasksList() {
 		}
 	}, [listTask])
 
-	useEffect(() => {
-		if (showTodoTasks[0]) {
-			console.log("showTodoTasks = ", showTodoTasks);
-		}
-		if (showDoneTasks[0]) {
-			console.log("showDoneTasks = ", showDoneTasks);
-		}
-	}, [listTask, showDoneTasks])
+
 
 	// Get tasks from server
 	async function getTasksFromServer() {
