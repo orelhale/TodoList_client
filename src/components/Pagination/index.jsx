@@ -7,9 +7,6 @@ export default function Pagination({ pagesNum, handleClick, currentPage }) {
 	// let toStart = pagesNum <= 3 ? pagesNum : ((currentPage +1) < pagesNum) ? (currentPage -1) : (currentPage -2)
 	let arr = [...Array(pagesNum).keys()]
 	// console.log("toStart  ",toStart)
-	console.log("currentPage  ", currentPage)
-	console.log("pagesNum  ", pagesNum)
-	console.log("1  ", ((currentPage + 1) < pagesNum))
 
 	let buttonStyle = {
 		borderRadius: "50%",

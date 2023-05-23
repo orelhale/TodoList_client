@@ -8,7 +8,7 @@ import SelectList from "../SelectList"
 import { getPriorityListPoint, getBallPriorityMUI } from "../../functions/taskFanctions"
 
 export default function AddTask() {
-	let { setListTask, editTask, setEditTask } = useContext(Context)
+	let { setListTask, editTask, setEditTask, editTaskSocket } = useContext(Context)
 
 	let [descriptionData, setDescriptionData] = useState("")
 	let [priorityData, setPriorityData] = useState(1)
@@ -21,8 +21,16 @@ export default function AddTask() {
 		}
 	}, [editTask])
 
+
 	let handleSelect = (e) => {
 		setPriorityData(e.target.value)
+		editTaskSocket({ priority: e.target.value })
+	}
+
+	let handleOnkeyPress = (e) => {
+		if (e.key == "Enter") {
+			handleAddOrEditTask()
+		}
 	}
 
 	let handleInput = (e) => {
@@ -30,6 +38,7 @@ export default function AddTask() {
 			setBorderStyle(null)
 		}
 		setDescriptionData(e.target.value)
+		editTaskSocket({ description: e.target.value })
 	}
 
 
@@ -43,7 +52,9 @@ export default function AddTask() {
 		// TO edit task
 		if (editTask) {
 			editTask.is_done = false;
+
 			dataToServer = { ...editTask, ...dataToServer }
+
 			apiFunctions("tasks", "PUT", dataToServer, (data) => {
 				// Get new list
 				setListTask(data)
@@ -53,6 +64,8 @@ export default function AddTask() {
 			})
 			// TO add task
 		} else {
+
+
 			apiFunctions("tasks", "POST", dataToServer, (data) => {
 				// Get new list
 				setListTask(data)
@@ -72,6 +85,7 @@ export default function AddTask() {
 
 			<div className={styles.inputContainer} style={borderStyle}>
 				<input
+					onKeyDown={handleOnkeyPress}
 					className={styles.input}
 					placeholder="New task"
 					value={descriptionData}

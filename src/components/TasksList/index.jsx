@@ -7,7 +7,7 @@ import SelectList from "../SelectList"
 import Pagination from "../Pagination"
 
 export default function TasksList() {
-	let { listTask, setListTask, setEditTask } = useContext(Context)
+	let { listTask, setListTask, setEditTask , editTask} = useContext(Context)
 
 	let [showTodoTasks, setShowTodoTasks] = useState([])
 	let [showDoneTasks, setShowDoneTasks] = useState([])
@@ -81,7 +81,6 @@ export default function TasksList() {
 		let sum = showTasks.length;
 		let result = Math.round(sum / amountToShow)
 		let num = result < (sum / amountToShow) ? (result + 1) : result;
-		console.log("num = ", num);
 		return num;
 	}
 
@@ -111,6 +110,7 @@ export default function TasksList() {
 							data={task}
 							handleCheckbox={handleCheckbox}
 							handleDelete={handleDelete}
+							editTask={editTask}
 						/>
 						{(indexTask < all.length - 1) && <hr className={styles.hr2} />}
 
