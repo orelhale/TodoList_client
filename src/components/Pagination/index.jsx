@@ -7,7 +7,6 @@ export default function Pagination({ pagesNum, handleClick, currentPage }) {
 	// let toStart = pagesNum <= 3 ? pagesNum : ((currentPage +1) < pagesNum) ? (currentPage -1) : (currentPage -2)
 	let arr = [...Array(pagesNum).keys()]
 
-
 	let buttonStyle = {
 		borderRadius: "50%",
 		height: "35px",
@@ -24,13 +23,13 @@ export default function Pagination({ pagesNum, handleClick, currentPage }) {
 
 	return (
 		<>
-			{pagesNum && (arr.map((num, index) => <>
-				{((index + 1) == (currentPage - 1) || (index + 1) == (currentPage) || (index + 1) == (currentPage + 1)) &&
+			{arr.length > 0 && (arr.map((num, index) => <>
+				{
+					((index + 1) == (currentPage - 1) || (index + 1) == (currentPage) || (index + 1) == (currentPage + 1)) &&
 					<Button
 						onClick={() => handleClick && handleClick((index + 1))}
 						value={(index + 1)}
 						style={currentPage == (index + 1) ? buttonStyleSelect : buttonStyle}
-						// className={currentPage == (index + 1) ? buttonStyleSelect : buttonStyle}
 					/>
 				}
 			</>))}

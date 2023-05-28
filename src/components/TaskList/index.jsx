@@ -1,23 +1,21 @@
 import styles from "./style.module.css"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 import Task from "../Task"
 import apiFunction from "../../functions/apiFunction"
 import Pagination from "../Pagination"
 
 export default function TaskList({ listTask, setTaskList, setEditTask }) {
 
-	let [showTodoTasks, setShowTodoTasks] = useState([])
-	let [showDoneTasks, setShowDoneTasks] = useState([])
-
-	let [showTasks, setShowTasks] = useState([])
-
+	let [list, setList] = useState([])
+	let [listOfOptions, setListOfOptions] = useState(null)
 	let [currentPage, setCurrentPage] = useState(1)
-	let [amountToShow, setAmountToShow] = useState(10)
+
+	const amountToShow = 5;
+	let pagesNum = listOfOptions ? Math.ceil((listOfOptions.All.length) / amountToShow) : 0;
 
 
 	useEffect(() => {
 		if (listTask[0]) {
-
 			let todoArr = [], doneArr = [];
 
 			listTask.forEach((task) => {
@@ -27,17 +25,25 @@ export default function TaskList({ listTask, setTaskList, setEditTask }) {
 					todoArr.push(task)
 			})
 
-			
-			setShowTodoTasks(todoArr)
-			setShowDoneTasks(doneArr)
-			setShowTasks(listTask)
+			setListOfOptions({ All: listTask, Todo: todoArr, Done: doneArr })
+			setList(sliceTheList(listTask))
 		}
 	}, [listTask])
+
+
+	useEffect(() => {
+		if (listOfOptions) {
+			if (pagesNum < currentPage)
+				setCurrentPage(currentPage - 1)
+			setList(sliceTheList())
+		}
+	}, [currentPage])
 
 
 	function handleDoubleClick(data) {
 		setEditTask(data)
 	}
+
 
 	// To change the task to execution and vice versa
 	function handleCheckbox(event, data) {
@@ -47,6 +53,7 @@ export default function TaskList({ listTask, setTaskList, setEditTask }) {
 			setTaskList(dataFromServer)
 		})
 	}
+
 
 	// To delete task
 	function handleDelete(data, index) {
@@ -58,35 +65,37 @@ export default function TaskList({ listTask, setTaskList, setEditTask }) {
 	}
 
 
-	function whatTasksToShow() {
+	// To delete task
+	function handleChangeOption(e) {
+		setList(listOfOptions[e.target.value])
+		setCurrentPage(1)
+	}
+
+
+	// slice the list by amount
+	function sliceTheList(specificArr = listOfOptions.All) {
+		let arr = specificArr || []
 		let copyCurrentPage = currentPage ? currentPage : 1
 		let start = ((copyCurrentPage - 1) * amountToShow);
 		let end = (start + amountToShow);
-		let arr = showTasks.slice(start, end);
-		return arr;
-	}
-
-	function numPagesToShow() {
-		let num = Math.ceil(showTasks.length / amountToShow)
-		console.log("num = ", num);
-		return num;
+		return arr.slice(start, end)
 	}
 
 
-	return (<>
+	return (
 		<div className={styles.TaskList}>
 
-			<div className={styles.buttonContainer}>
-				<button className={styles.button} onClick={() => { setShowTasks(listTask) }}>All tasks</button>
-				<button className={styles.button} onClick={() => { setShowTasks(showTodoTasks) }}>Todo</button>
-				<button className={styles.button} onClick={() => { setShowTasks(showDoneTasks) }}>Done</button>
-			</div>
-			<hr className={styles.hr} />
+			<div className={styles.TaskListContainer}>
+				<div className={styles.buttonContainer}>
+					{["All", "Todo", "Done"].map((option) =>
+						<button value={option} className={styles.button} onClick={handleChangeOption}>{option}</button>
+					)}
+				</div>
 
-			{showTasks[0] &&
-				<div className={styles.listContainer}>
+				<hr className={styles.hr} />
 
-					{whatTasksToShow().map((task, indexTask, all) => <>
+				{list[0] && <div className={styles.listContainer}>
+					{list.map((task, indexTask, all) => <>
 						<Task
 							handleDoubleClick={handleDoubleClick}
 							indexTask={indexTask}
@@ -96,14 +105,14 @@ export default function TaskList({ listTask, setTaskList, setEditTask }) {
 							handleDelete={handleDelete}
 						/>
 						{(indexTask < all.length - 1) && <hr className={styles.hr2} />}
-
 					</>)}
-				</div>
-			}
+				</div>}
+			</div>
+
+			<div className={styles.paginationContainer}>
+				<Pagination currentPage={currentPage} pagesNum={pagesNum} handleClick={setCurrentPage} />
+			</div>
 
 		</div>
-		<div className={styles.paginationContainer}>
-			{showTasks[0] && <Pagination currentPage={currentPage} pagesNum={numPagesToShow()} handleClick={setCurrentPage} />}
-		</div></>
 	)
 }

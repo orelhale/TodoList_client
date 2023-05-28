@@ -19,12 +19,6 @@ export default function Home() {
 		getTasksFromServer()
 	}, [])
 
-	useEffect(() => {
-		if (listTask) {
-			console.log("listTask = ", listTask);
-		}
-	}, [listTask])
-
 
 	return (
 		<div className={styles.Home}>
