@@ -6,7 +6,7 @@ import { useEffect } from "react";
 export default function Pagination({ pagesNum, handleClick, currentPage }) {
 	// let toStart = pagesNum <= 3 ? pagesNum : ((currentPage +1) < pagesNum) ? (currentPage -1) : (currentPage -2)
 	let arr = [...Array(pagesNum).keys()]
-
+	console.log("pagesNum = ",pagesNum);
 	let buttonStyle = {
 		borderRadius: "50%",
 		height: "35px",

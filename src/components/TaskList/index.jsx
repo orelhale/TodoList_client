@@ -9,13 +9,16 @@ export default function TaskList({ listTask, setTaskList, setEditTask }) {
 	let [list, setList] = useState([])
 	let [listOfOptions, setListOfOptions] = useState(null)
 	let [currentPage, setCurrentPage] = useState(1)
+	let [optionSelected, setOptionSelected] = useState("All")
 
-	const amountToShow = 5;
-	let pagesNum = listOfOptions ? Math.ceil((listOfOptions.All.length) / amountToShow) : 0;
+	const amountToShow = 3;
+	let pagesNum = listOfOptions ? Math.ceil((listOfOptions[optionSelected].length) / amountToShow) : 0;
 
+	console.log("=========== ");
 
 	useEffect(() => {
 		if (listTask[0]) {
+			// console.log("listTask = ", listTask);
 			let todoArr = [], doneArr = [];
 
 			listTask.forEach((task) => {
@@ -26,7 +29,6 @@ export default function TaskList({ listTask, setTaskList, setEditTask }) {
 			})
 
 			setListOfOptions({ All: listTask, Todo: todoArr, Done: doneArr })
-			setList(sliceTheList(listTask))
 		}
 	}, [listTask])
 
@@ -35,9 +37,26 @@ export default function TaskList({ listTask, setTaskList, setEditTask }) {
 		if (listOfOptions) {
 			if (pagesNum < currentPage)
 				setCurrentPage(currentPage - 1)
+			else
+				setList(sliceTheList())
+		}
+	}, [listOfOptions])
+
+
+
+	useEffect(() => {
+		if (listOfOptions) {
 			setList(sliceTheList())
 		}
 	}, [currentPage])
+
+
+	useEffect(() => {
+		if (listOfOptions && optionSelected) {
+			setList(sliceTheList())
+			setCurrentPage(1)
+		}
+	}, [optionSelected])
 
 
 	function handleDoubleClick(data) {
@@ -67,16 +86,15 @@ export default function TaskList({ listTask, setTaskList, setEditTask }) {
 
 	// To delete task
 	function handleChangeOption(e) {
-		setList(listOfOptions[e.target.value])
-		setCurrentPage(1)
+		setOptionSelected(e.target.value)
 	}
 
 
 	// slice the list by amount
-	function sliceTheList(specificArr = listOfOptions.All) {
-		let arr = specificArr || []
+	function sliceTheList() {
+		let arr = listOfOptions[optionSelected] || []
 		let copyCurrentPage = currentPage ? currentPage : 1
-		let start = ((copyCurrentPage - 1) * amountToShow);
+		let start = ((currentPage - 1) * amountToShow);
 		let end = (start + amountToShow);
 		return arr.slice(start, end)
 	}
@@ -88,7 +106,7 @@ export default function TaskList({ listTask, setTaskList, setEditTask }) {
 			<div className={styles.TaskListContainer}>
 				<div className={styles.buttonContainer}>
 					{["All", "Todo", "Done"].map((option) =>
-						<button value={option} className={styles.button} onClick={handleChangeOption}>{option}</button>
+						<button value={option} className={optionSelected == option ? styles.buttonSelected : styles.button} onClick={handleChangeOption}>{option}</button>
 					)}
 				</div>
 
