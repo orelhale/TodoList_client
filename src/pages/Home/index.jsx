@@ -1,13 +1,39 @@
 import styles from "./style.module.css"
-import TasksList from "../../components/TasksList"
-import AddTask from "../../components/AddTask"
+import TaskList from "../../components/TaskList"
+import CreateTask from "../../components/CreateTask"
+import { useEffect, useState } from "react";
+import apiFunction from "../../functions/apiFunction";
 
 export default function Home() {
 
+	let [listTask, setTaskList] = useState([]);
+	let [editTask, setEditTask] = useState(null);
+
+	// Get tasks from server
+	async function getTasksFromServer() {
+		let data = await apiFunction("tasks", "GET")
+		data && setTaskList(data)
+	}
+
+	useEffect(() => {
+		getTasksFromServer()
+	}, [])
+
+	useEffect(() => {
+		if (listTask) {
+			console.log("listTask = ", listTask);
+		}
+	}, [listTask])
+
+
 	return (
 		<div className={styles.Home}>
-			<AddTask />
-			<TasksList />
+			<div className={styles.Container}>
+
+				<CreateTask setTaskList={setTaskList} setEditTask={setEditTask} editTask={editTask} />
+				<TaskList setTaskList={setTaskList} setEditTask={setEditTask} listTask={listTask} />
+
+			</div>
 		</div>
 	)
 }

@@ -7,7 +7,7 @@ export default function Task({ data, style, indexTask, handleDoubleClick, handle
 
 	let { description, priority, is_done } = data
 	let styleCheckbox = { padding: "0px", '&.Mui-checked': { padding: "0px" } }
-	let styleBull = { "margin-right": "10px" }
+	let ballStyle = { "margin-right": "10px" }
 
 	return (
 		<div className={styles.Task} style={style}>
@@ -21,7 +21,7 @@ export default function Task({ data, style, indexTask, handleDoubleClick, handle
 			</div>
 
 			<div className={styles.deteleContainer}>
-				{getBallPriorityMUI(priority, styleBull)}
+				{getBallPriorityMUI(priority, ballStyle)}
 				<DeleteIcon color="error" onClick={() => { handleDelete(data, indexTask) }} />
 			</div>
 

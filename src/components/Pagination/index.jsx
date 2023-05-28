@@ -6,10 +6,7 @@ import { useEffect } from "react";
 export default function Pagination({ pagesNum, handleClick, currentPage }) {
 	// let toStart = pagesNum <= 3 ? pagesNum : ((currentPage +1) < pagesNum) ? (currentPage -1) : (currentPage -2)
 	let arr = [...Array(pagesNum).keys()]
-	// console.log("toStart  ",toStart)
-	console.log("currentPage  ", currentPage)
-	console.log("pagesNum  ", pagesNum)
-	console.log("1  ", ((currentPage + 1) < pagesNum))
+
 
 	let buttonStyle = {
 		borderRadius: "50%",
@@ -28,13 +25,14 @@ export default function Pagination({ pagesNum, handleClick, currentPage }) {
 	return (
 		<>
 			{pagesNum && (arr.map((num, index) => <>
-				{((index + 1) == (currentPage - 1) || (index + 1) == (currentPage)||(index + 1) == (currentPage + 1)) &&
-				<Button
-				onClick={() => handleClick && handleClick((index + 1))}
-				style={currentPage == (index + 1) ? buttonStyleSelect : buttonStyle}
-				value={(index + 1)}
-				/>
-			}
+				{((index + 1) == (currentPage - 1) || (index + 1) == (currentPage) || (index + 1) == (currentPage + 1)) &&
+					<Button
+						onClick={() => handleClick && handleClick((index + 1))}
+						value={(index + 1)}
+						style={currentPage == (index + 1) ? buttonStyleSelect : buttonStyle}
+						// className={currentPage == (index + 1) ? buttonStyleSelect : buttonStyle}
+					/>
+				}
 			</>))}
 		</>
 	)

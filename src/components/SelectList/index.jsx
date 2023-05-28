@@ -28,14 +28,14 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function SelectList({ handleChange, value, listMenuItem = [] }) {
+export default function SelectList({ handleChange, value, priorityList = [] }) {
 
     return (
         <span className={styles.selectListContainer}>
-            {listMenuItem[0] &&
+            {priorityList[0] &&
                 <FormControl variant="standard">
                     <Select value={value} onChange={handleChange} input={<BootstrapInput />}>
-                        {listMenuItem.map(({ value, element }, itemIndex) => <MenuItem key={itemIndex} value={value}>{element}</MenuItem>)}
+                        {priorityList.map(({ value, element }, itemIndex) => <MenuItem key={itemIndex} value={value}>{element}</MenuItem>)}
                     </Select>
                 </FormControl>
             }

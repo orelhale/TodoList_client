@@ -1,11 +1,11 @@
 import styles from "./style.module.css"
-import MainRouts from "../../routes/MainRouts"
+import MainRouter from "../../routes/MainRouter"
 
 export default function Main() {
 
 	return (
 		<div className={styles.Main}>
-			<MainRouts />
+			<MainRouter />
 		</div>
 	)
 }

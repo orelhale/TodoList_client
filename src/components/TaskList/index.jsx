@@ -1,13 +1,10 @@
 import styles from "./style.module.css"
-import Context from "../../context/Context"
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import Task from "../Task"
-import apiFunctions from "../../functions/apiFunctions"
-import SelectList from "../SelectList"
+import apiFunction from "../../functions/apiFunction"
 import Pagination from "../Pagination"
 
-export default function TasksList() {
-	let { listTask, setListTask, setEditTask } = useContext(Context)
+export default function TaskList({ listTask, setTaskList, setEditTask }) {
 
 	let [showTodoTasks, setShowTodoTasks] = useState([])
 	let [showDoneTasks, setShowDoneTasks] = useState([])
@@ -17,27 +14,26 @@ export default function TasksList() {
 	let [currentPage, setCurrentPage] = useState(1)
 	let [amountToShow, setAmountToShow] = useState(10)
 
-	useEffect(() => {
-		getTasksFromServer()
-		numPagesToShow()
-		whatTasksToShow()
-	}, [])
 
 	useEffect(() => {
 		if (listTask[0]) {
-			setShowTodoTasks(listTask.filter((task) => !task.is_done))
-			setShowDoneTasks(listTask.filter((task) => task.is_done))
+
+			let todoArr = [], doneArr = [];
+
+			listTask.forEach((task) => {
+				if (task.is_done)
+					doneArr.push(task)
+				else
+					todoArr.push(task)
+			})
+
+			
+			setShowTodoTasks(todoArr)
+			setShowDoneTasks(doneArr)
 			setShowTasks(listTask)
 		}
 	}, [listTask])
 
-
-
-	// Get tasks from server
-	async function getTasksFromServer() {
-		let data = await apiFunctions("tasks", "GET")
-		data && setListTask(data)
-	}
 
 	function handleDoubleClick(data) {
 		setEditTask(data)
@@ -46,57 +42,44 @@ export default function TasksList() {
 	// To change the task to execution and vice versa
 	function handleCheckbox(event, data) {
 		let checked = event.target.checked;
-		apiFunctions("tasks", "PUT", { is_done: checked, id: data.id }, (dataFromServer) => {
+		apiFunction("tasks", "PUT", { is_done: checked, id: data.id }, (dataFromServer) => {
 			// Get new list
-			setListTask(dataFromServer)
+			setTaskList(dataFromServer)
 		})
 	}
 
 	// To delete task
 	function handleDelete(data, index) {
-		apiFunctions("tasks", "DELETE", { id: data.id }, () => {
+		apiFunction("tasks", "DELETE", { id: data.id }, () => {
 			let state = [...listTask];
 			state.splice(index, 1)
-			setListTask(state)
+			setTaskList(state)
 		})
 	}
 
-	// to cheange amount task to show 
-	function handleInputAmountTasks(e) {
-		setAmountToShow(e.target.value)
-	}
 
 	function whatTasksToShow() {
 		let copyCurrentPage = currentPage ? currentPage : 1
 		let start = ((copyCurrentPage - 1) * amountToShow);
 		let end = (start + amountToShow);
 		let arr = showTasks.slice(start, end);
-		// let arr = fruits.slice(start, end) || [];
-		// console.log("start = ", start);
-		// console.log("end = ", end);
 		return arr;
 	}
 
 	function numPagesToShow() {
-		let sum = showTasks.length;
-		let result = Math.round(sum / amountToShow)
-		let num = result < (sum / amountToShow) ? (result + 1) : result;
+		let num = Math.ceil(showTasks.length / amountToShow)
 		console.log("num = ", num);
 		return num;
 	}
 
-	function handleClick(num) {
-		num != currentPage && setCurrentPage(num)
-	}
 
 	return (<>
-		<div className={styles.TasksList}>
+		<div className={styles.TaskList}>
 
 			<div className={styles.buttonContainer}>
 				<button className={styles.button} onClick={() => { setShowTasks(listTask) }}>All tasks</button>
 				<button className={styles.button} onClick={() => { setShowTasks(showTodoTasks) }}>Todo</button>
 				<button className={styles.button} onClick={() => { setShowTasks(showDoneTasks) }}>Done</button>
-				{/* <input value={amountToShow} min={1} onChange={handleInputAmountTasks} /> */}
 			</div>
 			<hr className={styles.hr} />
 
@@ -120,7 +103,7 @@ export default function TasksList() {
 
 		</div>
 		<div className={styles.paginationContainer}>
-			{showTasks[0] && <Pagination currentPage={currentPage} pagesNum={numPagesToShow()} handleClick={handleClick} />}
+			{showTasks[0] && <Pagination currentPage={currentPage} pagesNum={numPagesToShow()} handleClick={setCurrentPage} />}
 		</div></>
 	)
 }

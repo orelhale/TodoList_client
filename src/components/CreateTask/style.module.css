@@ -1,4 +1,4 @@
-.AddTask {
+.CreateTask {
    display: flex;
    justify-content: space-between;
    margin: 30px 0px;
@@ -35,6 +35,9 @@
 
 .icon {
    margin-right: 7px;
+}
+.borderStyle{
+   
 }
 
 @media only screen and (max-width: 650px) {

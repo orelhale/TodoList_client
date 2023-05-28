@@ -1,6 +1,6 @@
 import axios from "axios";
 
-async function apiFunctions(path, type, data, callbackSuccess, callbackError) {
+async function apiFunction(path, type, data, callbackSuccess, callbackError) {
     try {
         let option = {
             method: type,
@@ -25,4 +25,4 @@ async function apiFunctions(path, type, data, callbackSuccess, callbackError) {
     }
 }
 
-export default apiFunctions;
+export default apiFunction;
