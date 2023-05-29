@@ -23,7 +23,7 @@ export default function Home() {
 	return (
 		<div className={styles.Home}>
 			<div className={styles.Container}>
-
+				
 				<CreateTask setTaskList={setTaskList} setEditTask={setEditTask} editTask={editTask} />
 				<TaskList setTaskList={setTaskList} setEditTask={setEditTask} listTask={listTask} />
 

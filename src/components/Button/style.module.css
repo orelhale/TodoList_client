@@ -1,0 +1,82 @@
+.roundButton {
+   background-color: #FFF;
+   border: 1px solid #e0dfdf;
+   /* border: none; */
+   color: #1890FF;
+   border-radius: 50%;
+   height: 35px;
+   width: 35px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.roundSelectButton {
+   border-radius: 50%;
+   width: 35px;
+   border: 1px solid #e0dfdf;
+   /* border: none; */
+   height: 35px;
+   background-color: #1890FF;
+   color: #FFF;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.squareButton {
+   padding: 8px;
+   background-color: #fff;
+   color: #1890FF;
+   border: 1px solid #1890FF;
+   width: 100px;
+   margin-left: 10px;
+   border-radius: 4px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.squareSelectButton {
+   padding: 8.5px;
+   background-color: #1890FF;
+   color: #fff;
+   /* border: 1px solid #fff; */
+   border: none;
+   width: 100px;
+   margin-left: 10px;
+   border-radius: 4px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+
+.roundButton:hover {
+   background-color: #f0efef;
+   color: #0277e5;
+   transition: background-color 0.15s;
+   /* border: 1px solid #0277e5; */
+}
+
+.roundSelectButton:hover {
+   background-color: #0277e5;
+   color: #f0efef;
+   transition: background-color 0.15s;
+   /* border: 1px solid #f0efef; */
+}
+
+.squareButton:hover {
+   background-color: #f0efef;
+   color: #0277e5;
+   transition: background-color 0.15s;
+   border: 1px solid #0277e5;
+
+}
+
+.squareSelectButton:hover {
+   background-color: #0277e5;
+   color: #f0efef;
+   transition: background-color 0.15s;
+   /* border: 1px solid #f0efef; */
+}

@@ -1,24 +1,25 @@
 import styles from "./style.module.css"
-import { useEffect, useState, useMemo } from "react"
+import { useEffect, useState } from "react"
 import Task from "../Task"
 import apiFunction from "../../functions/apiFunction"
 import Pagination from "../Pagination"
+import Button from "../../components/Button"
 
 export default function TaskList({ listTask, setTaskList, setEditTask }) {
 
 	let [list, setList] = useState([])
-	let [listOfOptions, setListOfOptions] = useState(null)
+	let [listOfDisplayOptions, setListOfDisplayOptions] = useState(null)
 	let [currentPage, setCurrentPage] = useState(1)
 	let [optionSelected, setOptionSelected] = useState("All")
 
-	const amountToShow = 3;
-	let pagesNum = listOfOptions ? Math.ceil((listOfOptions[optionSelected].length) / amountToShow) : 0;
+	let displayOptions = ["All", "Todo", "Done"]
+	const amountToShow = 5;
 
-	console.log("=========== ");
+	let pagesNum = listOfDisplayOptions ? Math.ceil((listOfDisplayOptions[optionSelected].length) / amountToShow) : 0;
+
 
 	useEffect(() => {
 		if (listTask[0]) {
-			// console.log("listTask = ", listTask);
 			let todoArr = [], doneArr = [];
 
 			listTask.forEach((task) => {
@@ -27,32 +28,29 @@ export default function TaskList({ listTask, setTaskList, setEditTask }) {
 				else
 					todoArr.push(task)
 			})
-
-			setListOfOptions({ All: listTask, Todo: todoArr, Done: doneArr })
+			setListOfDisplayOptions({ All: listTask, Todo: todoArr, Done: doneArr })
 		}
 	}, [listTask])
 
 
 	useEffect(() => {
-		if (listOfOptions) {
+		if (listOfDisplayOptions) {
 			if (pagesNum < currentPage)
 				setCurrentPage(currentPage - 1)
 			else
 				setList(sliceTheList())
 		}
-	}, [listOfOptions])
-
+	}, [listOfDisplayOptions])
 
 
 	useEffect(() => {
-		if (listOfOptions) {
+		if (listOfDisplayOptions)
 			setList(sliceTheList())
-		}
 	}, [currentPage])
 
 
 	useEffect(() => {
-		if (listOfOptions && optionSelected) {
+		if (listOfDisplayOptions && optionSelected) {
 			setList(sliceTheList())
 			setCurrentPage(1)
 		}
@@ -92,8 +90,7 @@ export default function TaskList({ listTask, setTaskList, setEditTask }) {
 
 	// slice the list by amount
 	function sliceTheList() {
-		let arr = listOfOptions[optionSelected] || []
-		let copyCurrentPage = currentPage ? currentPage : 1
+		let arr = listOfDisplayOptions[optionSelected] || []
 		let start = ((currentPage - 1) * amountToShow);
 		let end = (start + amountToShow);
 		return arr.slice(start, end)
@@ -105,8 +102,8 @@ export default function TaskList({ listTask, setTaskList, setEditTask }) {
 
 			<div className={styles.TaskListContainer}>
 				<div className={styles.buttonContainer}>
-					{["All", "Todo", "Done"].map((option) =>
-						<button value={option} className={optionSelected == option ? styles.buttonSelected : styles.button} onClick={handleChangeOption}>{option}</button>
+					{displayOptions.map((option) =>
+						<Button value={option} type={optionSelected == option ? 3 : 4} onClick={handleChangeOption}>{option}</Button>
 					)}
 				</div>
 

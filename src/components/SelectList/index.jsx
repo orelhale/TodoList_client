@@ -11,6 +11,9 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
         position: 'relative',
         backgroundColor: theme.palette.background.paper,
         border: '1px solid #ced4da',
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
         fontSize: 16,
         padding: '2px 2px 2px 5px',
         fontFamily: [
@@ -28,14 +31,14 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function SelectList({ handleChange, value, priorityList = [] }) {
 
+export default function SelectList({ handleChange, value, selectList = [] }) {
     return (
         <span className={styles.selectListContainer}>
-            {priorityList[0] &&
+            {selectList[0] &&
                 <FormControl variant="standard">
                     <Select value={value} onChange={handleChange} input={<BootstrapInput />}>
-                        {priorityList.map(({ value, element }, itemIndex) => <MenuItem key={itemIndex} value={value}>{element}</MenuItem>)}
+                        {selectList.map(({ value, element }, itemIndex) => <MenuItem key={itemIndex} value={value}>{element}</MenuItem>)}
                     </Select>
                 </FormControl>
             }

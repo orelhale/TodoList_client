@@ -1,13 +1,12 @@
 import styles from "./style.module.css"
-import { getBallPriorityMUI } from "../../functions/taskFanctions"
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Checkbox } from "@mui/material";
+import PriorityBall from "../PriorityBall";
 
 export default function Task({ data, style, indexTask, handleDoubleClick, handleCheckbox, handleDelete }) {
-
 	let { description, priority, is_done } = data
-	let styleCheckbox = { padding: "0px", '&.Mui-checked': { padding: "0px" } }
-	let ballStyle = { "margin-right": "10px" }
+
+	let styleCheckbox = { padding: "0px", '&.Mui-checked': { padding: "0px", color: "#1890FF" } }
 
 	return (
 		<div className={styles.Task} style={style}>
@@ -21,7 +20,7 @@ export default function Task({ data, style, indexTask, handleDoubleClick, handle
 			</div>
 
 			<div className={styles.deteleContainer}>
-				{getBallPriorityMUI(priority, ballStyle)}
+				<PriorityBall type={priority} className={styles.marginRight} />
 				<DeleteIcon color="error" onClick={() => { handleDelete(data, indexTask) }} />
 			</div>
 
