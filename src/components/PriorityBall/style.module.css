@@ -1,0 +1,23 @@
+.highTask {
+   background-color: #fa0905;
+   color: #fa0905;
+   width: 10px;
+   height: 10px;
+   border-radius: 50%;
+}
+
+.middleTask {
+   background-color: #fcb131;
+   color: #fcb131;
+   width: 10px;
+   height: 10px;
+   border-radius: 50%;
+}
+
+.lowTask {
+   background-color: #35a839;
+   color: #35a839;
+   width: 10px;
+   height: 10px;
+   border-radius: 50%;
+}

@@ -1,4 +1,4 @@
-.AddTask {
+.CreateTask {
    display: flex;
    justify-content: space-between;
    margin: 30px 0px;
@@ -22,26 +22,24 @@
 }
 
 .buttonSubmit {
-   padding: 8px;
-   background-color: #1890FF;
-   width: 10%;
    margin-left: 10px;
-   border-radius: 4px;
-   color: #fff;
-   display: flex;
-   justify-content: center;
-   align-items: center;
 }
 
-.icon {
-   margin-right: 7px;
+.buttonText {
+   margin-left: 7px;
+   font-size: 14px;
 }
 
 @media only screen and (max-width: 650px) {
    .buttonText {
       display: none;
    }
+
    .icon {
       margin: 0;
    }
+}
+
+.borderStyle {
+   border-color: red;
 }

@@ -1,4 +1,4 @@
-.TasksList {
+.TaskListContainer {
    width: 100%;
    box-sizing: border-box;
    background-color: #FFFFFF;
@@ -27,9 +27,6 @@
 
 .button{
    padding: 8px;
-   /* background-color: #1890FF;
-   color: #fff; */
-   /* border: none; */
    background-color: #fff;
    color: #1890FF;
    border: 1px solid #1890FF;
@@ -40,14 +37,26 @@
    justify-content: center;
    align-items: center;
 }
+
+.buttonSelected{
+   padding: 8px;
+   background-color: #1890FF;
+   color: #fff;
+   border: 1px solid #fff;
+   width: 100px;
+   margin-left: 10px;
+   border-radius: 4px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
 .paginationContainer{
    width: 100%;
    display: flex;
    justify-content: center;
    flex-wrap: wrap;
    gap: 10px;
-
-   
 }
 
 @media only screen and (max-width: 650px) {

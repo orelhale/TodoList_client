@@ -1,6 +1,13 @@
-
-.Home{
+.Container {
    width: 90%;
    box-sizing: border-box;
-   
+}
+
+.Home {
+   background-color: #ebeaec;
+   width: 100vw;
+   min-height: 100vh;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
 }
