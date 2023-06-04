@@ -13,7 +13,7 @@ export default function TaskList({ listTask, setTaskList, setEditTask }) {
 	let [optionSelected, setOptionSelected] = useState("All")
 
 	let displayOptions = ["All", "Todo", "Done"]
-	const amountToShow = 5;
+	const amountToShow = 10;
 
 	let pagesNum = listOfDisplayOptions ? Math.ceil((listOfDisplayOptions[optionSelected].length) / amountToShow) : 0;
 
