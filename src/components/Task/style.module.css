@@ -1,9 +1,14 @@
 .Task {
    display: flex;
    flex-direction: row;
-   margin: 15px;
+   padding: 13px;
+   margin: 2px;
 }
-
+.Task:hover{
+   background-color: rgb(241, 241, 241);
+   border-radius: 2px;
+   transition: background-color 0.2s;
+}
 
 .description {
    width: 100%;
