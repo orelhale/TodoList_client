@@ -75,6 +75,8 @@ export default function TaskList({ listTask, setTaskList, setEditTask }) {
 	// To delete task
 	function handleDelete(data, index) {
 		apiFunction("tasks", "DELETE", { id: data.id }, () => {
+			if (optionSelected != "All") 
+				index = listTask.findIndex(item => item.id == data.id)
 			let state = [...listTask];
 			state.splice(index, 1)
 			setTaskList(state)
