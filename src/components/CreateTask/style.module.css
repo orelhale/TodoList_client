@@ -15,6 +15,11 @@
    align-items: center;
 }
 
+.inputContainer:hover{
+   background-color: #f6f6f6;
+   transition: background-color 0.05s;
+}
+
 .input {
    all: unset;
    height: 20px;
