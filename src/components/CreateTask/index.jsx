@@ -26,6 +26,7 @@ export default function CreateTask({ setTaskList, editTask, setEditTask }) {
 
 	let handleSelect = (e) => {
 		setPriorityData(e.target.value)
+		editTask && setEditTask((item) => ({ ...item, priority: e.target.value }))
 	}
 
 
@@ -33,8 +34,8 @@ export default function CreateTask({ setTaskList, editTask, setEditTask }) {
 		if (borderStyle)
 			setBorderStyle(null)
 		setDescriptionData(e.target.value)
+		editTask && setEditTask((item) => ({ ...item, description: e.target.value }))
 	}
-
 
 	let handleAddOrEditTask = () => {
 		if (!descriptionData) {
